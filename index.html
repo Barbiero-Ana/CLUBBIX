@@ -165,7 +165,7 @@
 
   /* ---------- Hero ---------- */
   .hero{
-    background:var(--bg-hero);
+  background: radial-gradient(circle at center, #352155 0%, #241439 58%, #1b0f2e 100%);
     position:relative;
     overflow:hidden;
     padding:100px 0 0;
@@ -174,12 +174,12 @@
     position:absolute;
     left:50%;
     bottom:-540px;
-    width:1300px;
-    height:760px;
+    width:4900px;
+    height:880px;
     transform:translateX(-50%);
-    border-radius:50%;
+    border-radius:90%;
     background:radial-gradient(circle, rgba(245,132,31,0.4) 0%, rgba(234,90,28,0.22) 24%, rgba(180,58,198,0.1) 44%, rgba(36,20,57,0) 64%);
-    filter:blur(45px);
+    filter:blur(115px);
     z-index:0;
     pointer-events:none;
   }
@@ -197,22 +197,22 @@
     display:flex;
     flex-direction:column;
     justify-content:center;
-    transform:translateX(-28px);
+    transform:translate(-54px, -38px);
   }
   .hero h1{font-size:clamp(44px,5.6vw,72px);line-height:1.06;color:var(--text-light);}
   .hero p.lead{
-    margin-top:24px;
-    font-size:21px;
-    line-height:1.55;
+    margin-top:20px;
+    font-size:20px;
+    line-height:1.35;
     color:var(--text-muted);
-    max-width:520px;
+    max-width:420px;
   }
   .hero p.lead strong{color:var(--text-light);font-weight:700;}
   .hero .cta-row{
-    margin-top:32px;
+    margin-top:55px;
     display:flex;
     align-items:center;
-    gap:24px;
+    gap:20px;
     flex-wrap:wrap;
   }
   .member-note{font-size:15px;color:var(--text-muted);}
@@ -230,6 +230,7 @@
     justify-content:center;
     transform:translateX(34px);
     z-index:1;
+    isolation:isolate;
   }
   .ring-img{
     position:absolute;
@@ -239,9 +240,10 @@
     opacity:0.9;
   }
   .ring-outer{
-    width:150%;
+    width:140%;
     height:360%;
     opacity:1;
+    z-index:1;
     animation:spin-outer 90s linear infinite;
     background-size:contain;
     background-repeat:no-repeat;
@@ -249,13 +251,15 @@
   }
   .ring-middle{
     /* yellow circle */
+    position: absolute;
     width:130%;
+    z-index:0;
     aspect-ratio:1/1;
     background-size:contain;
     background-repeat:no-repeat;
     animation:spin-middle 40s linear infinite;
   }
-  .ring-inner{width:95%;animation:spin-inner 60s linear infinite reverse;}
+  .ring-inner{width:95%;z-index:2;animation:spin-inner 60s linear infinite reverse;}
   .badge-orbit-shift{
     position:absolute;
     inset:0;
@@ -266,28 +270,29 @@
   .badge-orbit{
     position:absolute;
     inset:0;
-    /* herda a rotação do DotCircle (sem animação própria) */
+    z-index:3;
+    pointer-events:none;
     transform-origin:50% 50%;
   }
   .badge-anchor{
     position:absolute;
     width:auto;
     height:auto;
-    z-index:7; /* garante que o badge fique acima da YellowCircle */
+    z-index:4;
   }
   /* Posicionamento percentual para alinhar os badges sobre os pontos do DotCircle */
   /* anchors deslocadas para fora da YellowCircle */
   .anchor-1{left:30%;top:64%;} /* +300 empresas */
   .anchor-2{left:63%;top:35%;}  /* Under Armor */
   .anchor-3{left:20%;top:62%;} /* Petz */
-  .anchor-4{left:50%;top:6%;}  /* Vivara - top center */
+  .anchor-4{left:86%;top:56%;}  /* Vivara - top center */
   .anchor-5{left:73%;top:38%;} /* Tampatinhas */
-  .anchor-6{left:4%;top:44%;} /* Escape50 */
-  .anchor-7{left:87%;top:50%;} /* Centauro */
-  .anchor-8{left:80%;top:43%;} /* Espaço La Vieh */
+  .anchor-6{left:2%;top:44%;} /* Escape50 */
+  .anchor-7{left:89%;top:50%;} /* Centauro */
+  .anchor-8{left:84%;top:43%;} /* Espaço La Vieh */
   .anchor-9{left:7%;top:57%;} /* Riquepro */
   .anchor-10{left:7%;top:40%;}/* Coloiado Fitness */
-  .anchor-11{left:3%;top:49%;} /* EVINO */
+  .anchor-11{left:0.5%;top:49%;} /* EVINO */
   .anchor-12{left:2%;top:53%;} /* Farmácias */
   .anchor-13{left:23%;top:36.01%;} /* Cinemas */
   .anchor-14{left:40%;top:34%;} /* Academia MOVE */
@@ -371,18 +376,94 @@
     background:var(--bg-about);
     position:relative;
     overflow:hidden;
-    padding:110px 0;
+    padding:30px 0;
+  }
+  .about::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:58%;
+    width:1800px;
+    height:820px;
+    transform:translate(-50%, -50%);
+    border-radius:60% 40% 50% 50% / 50% 55% 45% 50%;
+    background:radial-gradient(circle, rgba(245,132,31,0.34) 0%, rgba(234,90,28,0.18) 22%, rgba(180,58,198,0.12) 40%, rgba(36,20,57,0) 68%);
+    filter:blur(110px);
+    z-index:0;
+    pointer-events:none;
   }
   .about .container{
     display:grid;
-    grid-template-columns:0.85fr 1.15fr;
-    gap:56px;
-    align-items:center;
+    grid-template-columns:0.82fr 1.18fr;
+    gap:0;
+    align-items:end;
     position:relative;
     z-index:2;
+    min-height:620px;
+    padding-top:12px;
   }
-  .about-visual{position:relative;display:flex;justify-content:center;}
-  .about-visual img{border-radius:24px;max-width:100%;}
+  .about-visual{
+    position:relative;
+    display:flex;
+    align-items:flex-end;
+    justify-content:flex-start;
+    margin-left:-110px;
+    width:540px;
+    min-height:520px;
+    overflow:visible;
+    transform:translateY(12px);
+  }
+  .about-rings{
+    position:absolute;
+    left:-140px;
+    bottom:-130px;
+    width:620px;
+    height:620px;
+    z-index:0;
+    pointer-events:none;
+    overflow:visible;
+  }
+  .about-rings .ring-img{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:center;
+    opacity:1;
+  }
+  .about-rings .ring-outer{
+    width:120%;
+    height:120%;
+    background-image:url('assets/img/OrangeCircleDot.png');
+    transform:translate(-50%,-50%) rotate(-18deg);
+    z-index:1;
+  }
+  .about-rings .ring-middle{
+    width:92%;
+    height:92%;
+    background-image:url('assets/img/yellowCircle.png');
+    transform:translate(-50%,-50%) rotate(8deg);
+    z-index:3;
+  }
+  .about-rings .ring-inner{
+    width:68%;
+    height:68%;
+    background-image:url('assets/img/whiteCircle.png');
+    transform:translate(-50%,-50%) rotate(-8deg);
+    z-index:2;
+  }
+  .about-visual img{
+    position:relative;
+    z-index:4;
+    display:block;
+    width:clamp(340px, 32vw, 500px);
+    max-height:540px;
+    height:auto;
+    object-fit:contain;
+    margin-top:auto;
+  }
   .about h2{font-size:clamp(32px,3.6vw,48px);line-height:1.14;color:var(--text-light);}
   .about h2 .gradient-text{font-weight:800;}
   .about p.lead{
@@ -399,10 +480,16 @@
     flex-wrap:wrap;
   }
   .stat-card{
-    background:var(--card-bg);
-    border-radius:10px;
-    padding:20px 22px;
-    min-width:150px;
+    flex:1 1 180px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:18px;
+    padding:22px 22px 18px;
+    min-height:110px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    box-shadow:0 10px 28px rgba(0,0,0,0.12);
   }
   .stat-card .num{
     font-family:'Poppins',sans-serif;
@@ -738,7 +825,7 @@
               <div class="badge-anchor anchor-3"><div class="float-badge">Petz</div></div>
               <div class="badge-anchor anchor-4"><div class="float-badge">Vivara</div></div>
               <div class="badge-anchor anchor-5"><div class="float-badge">Tampatinhas</div></div>
-              <div class="badge-anchor anchor-6"><div class="float-badge">Escape50</div></div>
+              <div class="badge-anchor anchor-6"><div class="float-badge">Escape60</div></div>
               <div class="badge-anchor anchor-7"><div class="float-badge">Centauro</div></div>
               <div class="badge-anchor anchor-8"><div class="float-badge">Espaço La Vieh</div></div>
               <div class="badge-anchor anchor-9"><div class="float-badge">Riquepro</div></div>
@@ -762,6 +849,11 @@
 <section class="about">
   <div class="container">
     <div class="about-visual">
+      <div class="about-rings" aria-hidden="true">
+        <div class="ring-img ring-outer"></div>
+        <div class="ring-img ring-middle"></div>
+        <div class="ring-img ring-inner"></div>
+      </div>
       <img src="assets/img/ManAbout.png" alt="Membro Clubbix sorrindo">
     </div>
     <div class="about-copy">
