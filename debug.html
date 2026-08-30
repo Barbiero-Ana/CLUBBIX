@@ -237,9 +237,24 @@
     transform:translate(-50%,-50%);
     opacity:0.9;
   }
-  .ring-outer{width:132%;animation:spin 90s linear infinite;}
-  .ring-middle{width:104%;animation:spin 40s linear infinite;}
-  .ring-inner{width:78%;animation:spin 60s linear infinite reverse;}
+  .ring-outer{
+    width:360%;
+    height:360%;
+    opacity:1;
+    animation:spin-outer 90s linear infinite;
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:center;
+  }
+  .ring-middle{
+    /* yellow circle */
+    width:260%;
+    aspect-ratio:1/1;
+    background-size:contain;
+    background-repeat:no-repeat;
+    animation:spin-middle 40s linear infinite;
+  }
+  .ring-inner{width:95%;animation:spin-inner 60s linear infinite reverse;}
   .badge-orbit-shift{
     position:absolute;
     inset:0;
@@ -247,28 +262,40 @@
     z-index:3;
     pointer-events:none;
   }
-  .badge-orbit{
-    position:absolute;
-    inset:0;
-    animation:orbit-spin 110s linear infinite;
-  }
+    .badge-orbit{
+      position:absolute;
+      inset:0;
+      /* herda a rotação do DotCircle (sem animação própria) */
+      transform-origin:50% 50%;
+    }
   .badge-anchor{
     position:absolute;
-    top:50%;
-    left:50%;
-    width:0;
-    height:0;
+    width:auto;
+    height:auto;
+    z-index:6; /* garante que o badge fique acima da YellowCircle */
   }
-  .anchor-1{transform:translate(-270px,-189px);}
-  .anchor-2{transform:translate(175px,-280px);}
-  .anchor-3{transform:translate(-270px,189px);}
+  /* anchors deslocadas para fora da YellowCircle */
+  .anchor-1{left:28%;top:14%;}
+  .anchor-2{left:80%;top:8%;}
+  .anchor-3{left:12%;top:36%;}
+  .anchor-4{left:50%;top:6%;}
+  .anchor-5{left:88%;top:26%;}
+  .anchor-6{left:94%;top:54%;}
+  .anchor-7{left:88%;top:74%;}
+  .anchor-8{left:68%;top:88%;}
+  .anchor-9{left:50%;top:96%;}
+  .anchor-10{left:18%;top:88%;}
+  .anchor-11{left:6%;top:74%;}
+  .anchor-12{left:2%;top:54%;}
+  .anchor-13{left:36%;top:28%;}
+  .anchor-14{left:70%;top:28%;}
   @keyframes orbit-spin{
     from{transform:rotate(0deg);}
     to{transform:rotate(360deg);}
   }
   @keyframes orbit-spin-reverse{
-    from{transform:translate(-50%,-50%) rotate(0deg);}
-    to{transform:translate(-50%,-50%) rotate(-360deg);}
+    from{transform:rotate(0deg);}
+    to{transform:rotate(-360deg);}
   }
   .hero-base-line{
     position:absolute;
@@ -278,15 +305,23 @@
     max-width:88%;
     height:5px;
     transform:translateX(-50%);
-    background:linear-gradient(90deg, transparent 0%, rgba(234,90,28,1) 50%, transparent 100%);
-    filter:blur(1.5px);
-    box-shadow:0 0 26px 6px rgba(234,90,28,0.6);
+    background:#e07722;
+    filter:none;
+    box-shadow:none;
     z-index:3;
     pointer-events:none;
   }
   @keyframes spin{
     from{transform:translate(-50%,-50%) rotate(0deg);}
     to{transform:translate(-50%,-50%) rotate(360deg);}
+  }
+  @keyframes spin-rotate{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
+  }
+  @keyframes spin-rotate-reverse{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(-360deg);}
   }
   .hero-visual img.person{
     position:absolute;
@@ -315,8 +350,10 @@
     color:#fff;
     white-space:nowrap;
     box-shadow:0 10px 22px rgba(0,0,0,0.3);
-    animation:orbit-spin-reverse 110s linear infinite;
+    /* contra-rotação para manter o badge horizontal enquanto orbitam */
+    animation:spin-rotate-reverse 90s linear infinite;
     pointer-events:auto;
+    transform:translate(-50%,-50%);
   }
 
   /* ---------- About ---------- */
@@ -684,19 +721,30 @@
     </div>
     <div class="hero-visual">
       <div class="hero-rings">
-        <img class="ring-img ring-outer" src="assets/img/OrangeCircleDot.png" alt="">
-        <img class="ring-img ring-middle" src="assets/img/yellowCircle.png" alt="">
+        <div class="ring-img ring-outer" role="img" aria-label="circle-dot" style="background-image:url(assets/img/OrangeCircleDot.png);background-size:contain;background-repeat:no-repeat;">
+          <div class="badge-orbit">
+            <div class="badge-anchor anchor-1"><div class="float-badge">+300 empresas</div></div>
+            <div class="badge-anchor anchor-2"><div class="float-badge">Under Armor</div></div>
+            <div class="badge-anchor anchor-3"><div class="float-badge">Petz</div></div>
+            <div class="badge-anchor anchor-4"><div class="float-badge">Vivara</div></div>
+            <div class="badge-anchor anchor-5"><div class="float-badge">Tampatinhas</div></div>
+            <div class="badge-anchor anchor-6"><div class="float-badge">Escape50</div></div>
+            <div class="badge-anchor anchor-7"><div class="float-badge">Centauro</div></div>
+            <div class="badge-anchor anchor-8"><div class="float-badge">Espaço La Vieh</div></div>
+            <div class="badge-anchor anchor-9"><div class="float-badge">Riquepro</div></div>
+            <div class="badge-anchor anchor-10"><div class="float-badge">Coloiado Fitness</div></div>
+            <div class="badge-anchor anchor-11"><div class="float-badge">EVINO</div></div>
+            <div class="badge-anchor anchor-12"><div class="float-badge">Farmácias</div></div>
+            <div class="badge-anchor anchor-13"><div class="float-badge">Cinemas</div></div>
+            <div class="badge-anchor anchor-14"><div class="float-badge">Academia MOVE</div></div>
+          </div>
+        </div>
+        <div class="ring-img ring-middle" role="img" aria-label="yellow-circle" style="background-image:url(assets/img/yellowCircle.png);background-size:contain;background-repeat:no-repeat;"></div>
         <img class="ring-img ring-inner" src="assets/img/whiteCircle.png" alt="">
       </div>
       <img class="person" src="assets/img/WomanHero.png" alt="Membro Clubbix usando o app">
       <div class="hero-base-line"></div>
-      <div class="badge-orbit-shift">
-        <div class="badge-orbit">
-          <div class="badge-anchor anchor-1"><div class="float-badge">+300 empresas</div></div>
-          <div class="badge-anchor anchor-2"><div class="float-badge">Under Armor</div></div>
-          <div class="badge-anchor anchor-3"><div class="float-badge">Petz</div></div>
-        </div>
-      </div>
+      
     </div>
   </div>
 </section>
