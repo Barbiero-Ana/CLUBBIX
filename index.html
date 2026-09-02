@@ -282,20 +282,20 @@
   }
   /* Posicionamento percentual para alinhar os badges sobre os pontos do DotCircle */
   /* anchors deslocadas para fora da YellowCircle */
-  .anchor-1{left:30%;top:64%;} /* +300 empresas */
-  .anchor-2{left:63%;top:35%;}  /* Under Armor */
-  .anchor-3{left:20%;top:62%;} /* Petz */
-  .anchor-4{left:86%;top:56%;}  /* Vivara - top center */
-  .anchor-5{left:73%;top:38%;} /* Tampatinhas */
-  .anchor-6{left:2%;top:44%;} /* Escape50 */
-  .anchor-7{left:89%;top:50%;} /* Centauro */
-  .anchor-8{left:84%;top:43%;} /* Espaço La Vieh */
-  .anchor-9{left:7%;top:57%;} /* Riquepro */
-  .anchor-10{left:7%;top:40%;}/* Coloiado Fitness */
-  .anchor-11{left:0.5%;top:49%;} /* EVINO */
-  .anchor-12{left:2%;top:53%;} /* Farmácias */
-  .anchor-13{left:23%;top:36.01%;} /* Cinemas */
-  .anchor-14{left:40%;top:34%;} /* Academia MOVE */
+  .anchor-1{left:44.75%;top:34%;} /* +300 empresas */
+  .anchor-2{left:63.95%;top:35.49%;}  /* Under Armor */
+  .anchor-3{left:79.35%;top:39.65%;} /* Petz */
+  .anchor-4{left:87.89%;top:45.66%;}  /* Vivara */
+  .anchor-5{left:87.89%;top:52.34%;} /* Tampatinhas */
+  .anchor-6{left:79.35%;top:58.35%;} /* Escape50 */
+  .anchor-7{left:63.95%;top:62.51%;} /* Centauro */
+  .anchor-8{left:44.75%;top:64%;} /* Espaço La Vieh */
+  .anchor-9{left:25.55%;top:62.51%;} /* Riquepro */
+  .anchor-10{left:10.15%;top:58.35%;}/* Coloiado Fitness */
+  .anchor-11{left:1.61%;top:52.34%;} /* EVINO */
+  .anchor-12{left:1.61%;top:45.66%;} /* Farmácias */
+  .anchor-13{left:10.15%;top:39.65%;} /* Cinemas */
+  .anchor-14{left:25.55%;top:35.49%;} /* Academia MOVE */
   @keyframes orbit-spin{
     from{transform:rotate(0deg);}
     to{transform:rotate(360deg);}
@@ -884,31 +884,203 @@
     color:rgba(255,255,255,0.78);
   }
 
+  /* ---------- Menu mobile (elemento novo, invisível no desktop) ---------- */
+  .menu-toggle{
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:5px;
+    width:40px;
+    height:40px;
+    padding:0;
+    background:transparent;
+    border:none;
+    cursor:pointer;
+    flex-shrink:0;
+  }
+  .menu-toggle span{
+    display:block;
+    width:22px;
+    height:2px;
+    border-radius:2px;
+    background:#fff;
+    transition:transform 0.3s ease, opacity 0.3s ease;
+  }
+  header.nav-open .menu-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  header.nav-open .menu-toggle span:nth-child(2){opacity:0;}
+  header.nav-open .menu-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  /* ---------- Animações de scroll (desktop + responsivo) ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .stat-card.reveal:nth-child(2){transition-delay:0.1s;}
+  .stat-card.reveal:nth-child(3){transition-delay:0.2s;}
+  .plan-card.reveal:nth-child(2){transition-delay:0.12s;}
+  .plan-card.reveal:nth-child(3){transition-delay:0.24s;}
+
+  /* ---------- Hero: textos sobem ao carregar a página ---------- */
+  @keyframes heroTextUp{
+    from{opacity:0;transform:translateY(26px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .hero h1,
+  .hero p.lead,
+  .hero .cta-row,
+  .hero .member-note{
+    opacity:0;
+    animation:heroTextUp 0.8s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  .hero h1{animation-delay:0.1s;}
+  .hero p.lead{animation-delay:0.28s;}
+  .hero .cta-row{animation-delay:0.46s;}
+  .hero .member-note{animation-delay:0.62s;}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{transition:none;opacity:1;transform:none;}
+    .hero h1,
+    .hero p.lead,
+    .hero .cta-row,
+    .hero .member-note{animation:none;opacity:1;transform:none;}
+  }
+
+  /* =====================================================
+     RESPONSIVO — reestruturado (≤900px). Desktop acima
+     deste bloco permanece inalterado.
+     ===================================================== */
   @media (max-width:900px){
-    .hero .container{flex-direction:column;}
-    .hero-copy{flex:none;}
-    .about .container,
-    .qa .container,
-    .cta-final .container{grid-template-columns:1fr;}
-    .hero-visual{
-      position:absolute;
-      top:64px;
-      right:-100px;
-      flex:none;
-      width:210px;
-      height:210px;
-      max-width:none;
-      z-index:0;
+
+    /* --- base --- */
+    .container{padding:0 24px;}
+
+    /* --- header / menu mobile --- */
+    header .container{flex-wrap:wrap;align-items:center;height:auto;min-height:0;padding-top:8px;padding-bottom:8px;column-gap:10px;row-gap:0;}
+    .logo{align-items:center;}
+    .logo img{width:27px;height:27px;display:block;}
+    .logo span{font-size:17px;line-height:1;display:block;}
+    .menu-toggle{display:flex;order:2;align-self:center;width:28px;height:28px;gap:4px;margin:0;}
+    .menu-toggle span{width:19px;}
+    nav.main-nav{
+      order:4;
+      width:100%;
+      flex-direction:column;
+      align-items:stretch;
+      gap:2px;
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
+      transition:max-height 0.35s ease, opacity 0.3s ease;
     }
-    .hero-visual img.person,
-    .hero-base-line,
-    .badge-orbit-shift{display:none;}
-    .hero-rings{transform:none;}
+    header.nav-open nav.main-nav{
+      max-height:280px;
+      opacity:1;
+      padding:6px 0 4px;
+      border-top:1px solid rgba(255,255,255,0.11);
+      margin-top:8px;
+    }
+    nav.main-nav a{width:100%;padding:9px 8px;font-size:13.8px;}
+    nav.main-nav a::after{display:none;}
+    .header-actions{
+      order:5;
+      width:100%;
+      flex-direction:row;
+      gap:8px;
+      max-height:0;
+      overflow:hidden;
+      opacity:0;
+      transition:max-height 0.3s ease, opacity 0.25s ease;
+    }
+    header.nav-open .header-actions{
+      max-height:60px;
+      opacity:1;
+      padding-bottom:12px;
+    }
+    .header-actions a{flex:1;padding:9px 14px;font-size:13px;text-align:center;}
+
+    /* --- hero --- */
+    .hero{padding:24px 0 64px;overflow:hidden;}
+    .hero .container{flex-direction:column;min-height:0;gap:8px;}
+    .hero-copy{
+      flex:none;
+      transform:none;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+    }
+    .hero h1{font-size:clamp(26px,7.2vw,32px);line-height:1.2;letter-spacing:-0.01em;max-width:300px;}
+    .hero p.lead{font-size:15px;line-height:1.55;max-width:300px;margin-top:14px;}
+    .hero .cta-row{margin-top:24px;margin-bottom:32px;justify-content:center;width:100%;}
+    .hero .cta-row .btn{width:auto;min-width:70%;padding:13px 24px;}
+    .hero .member-note{margin-top:18px !important;}
+    .hero-visual{display:none;}
     .hero-orb{width:900px;height:700px;bottom:-260px;}
-    .plans-grid{grid-template-columns:1fr;max-width:340px;}
-    .plan-card.highlight{transform:none;}
-    .footer-top{grid-template-columns:1fr 1fr;}
-    nav.main-nav{display:none;}
+
+    /* --- about --- */
+    .about{padding:0 0 56px;overflow:hidden;}
+    .about .container{grid-template-columns:1fr;min-height:0;padding-top:0;gap:24px;}
+    .about-visual{
+      width:100%;
+      max-width:none;
+      min-height:0;
+      margin:-280px 0 0;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      transform:none;
+    }
+    .about-rings{position:relative;left:auto;bottom:auto;top:auto;width:330px;height:330px;margin:0 auto;transform:none;}
+    .about-visual img{display:none;}
+    .about-copy{margin-top:32px;}
+    .about p.lead{max-width:none;}
+    .stat-row{flex-direction:column;margin-top:28px;}
+    .stat-card{flex:1 1 auto;}
+
+    /* --- plans --- */
+    .plans{padding:64px 0 72px;}
+    .plans h2{font-size:clamp(32px,8vw,42px);letter-spacing:-0.03em;}
+    .plans p.sub{font-size:16px;}
+    .plans-grid{grid-template-columns:1fr;max-width:380px;gap:22px;margin-top:40px;}
+    .plan-card.highlight{margin-top:0;order:-1;}
+
+    /* --- qa / bixie --- */
+    .qa{padding:64px 0;}
+    .qa .container{grid-template-columns:1fr;gap:36px;}
+    .qa p.lead{max-width:none;}
+    .chat-mock{padding:22px;}
+
+    /* --- cta final --- */
+    .cta-final{padding:56px 0 60px;}
+    .cta-final h2{font-size:clamp(32px,10vw,52px);}
+    .cta-final .btn-primary{
+      min-width:0;
+      width:100%;
+      margin-top:34px;
+      padding:18px 24px;
+    }
+
+    /* --- footer --- */
+    footer{padding:48px 0 0;}
+    .footer-top{grid-template-columns:1fr 1fr;gap:28px 20px;padding-bottom:36px;}
+    .footer-brand{grid-column:1 / -1;}
+    .footer-brand p{max-width:none;}
+  }
+
+  /* =====================================================
+     Ajustes finos — telas pequenas de celular (≤480px)
+     ===================================================== */
+  @media (max-width:480px){
+    .container{padding:0 18px;}
+    .footer-top{grid-template-columns:1fr;}
+    .footer-brand{grid-column:auto;}
+    .cta-final .btn-primary{font-size:16px;padding:16px 20px;}
   }
 </style>
 </head>
@@ -920,7 +1092,10 @@
       <img src="assets/img/Logo Clubbix.png" alt="Clubbix">
       <span>Clubbix</span>
     </div>
-    <nav class="main-nav">
+    <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-nav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main-nav" id="main-nav">
       <a href="#convenio">CONVÊNIO UNIVAG</a>
       <a href="#exclusividade">Exclusividade</a>
       <a href="#indique">Indique e Ganhe</a>
@@ -944,7 +1119,7 @@
       </div>
       <p class="member-note" style="margin-top:28px;">Já é membro? <a href="#acessar">Acessar minha conta</a></p>
     </div>
-    <div class="hero-visual">
+    <div class="hero-visual reveal">
       <div class="hero-rings">
           <div class="ring-img ring-outer" role="img" aria-label="circle-dot" style="background-image:url(assets/img/OrangeCircleDot.png);background-size:contain;background-repeat:no-repeat;">
             <div class="badge-orbit">
@@ -976,7 +1151,7 @@
 
 <section class="about">
   <div class="container">
-    <div class="about-visual">
+    <div class="about-visual reveal">
       <div class="about-rings" aria-hidden="true">
         <div class="ring-img ring-outer"></div>
         <div class="ring-img ring-middle"></div>
@@ -984,19 +1159,19 @@
       </div>
       <img src="assets/img/ManAbout.png" alt="Membro Clubbix sorrindo">
     </div>
-    <div class="about-copy">
+    <div class="about-copy reveal">
       <h2>Conectamos você a <span class="gradient-text">vantagens</span> que fazem parte da vida real.</h2>
       <p class="lead">Somos uma plataforma de convênios e benefícios que aproxima pessoas de empresas, serviços e experiências em um só lugar, nossos membros encontram condições exclusivas em educação, saúde, alimentação, lazer, compras e <strong>muito mais.</strong></p>
       <div class="stat-row">
-        <div class="stat-card">
+        <div class="stat-card reveal">
           <div class="num">+ 300</div>
           <div class="label">Estabelecimentos</div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card reveal">
           <div class="num">100%</div>
           <div class="label">Digital - Resolva da sua casa</div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card reveal">
           <div class="num">+10</div>
           <div class="label">Categorias de convênios</div>
         </div>
@@ -1007,11 +1182,11 @@
 
 <section class="plans" id="planos">
   <div class="container">
-    <h2>Escolha quanto tempo você quer <span class="gradient-text">aproveitar.</span></h2>
-    <p class="sub">Quanto mais tempo com o Clubbix, maior o potencial de aproveitar sua rede de benefícios.</p>
+    <h2 class="reveal">Escolha quanto tempo você quer <span class="gradient-text">aproveitar.</span></h2>
+    <p class="sub reveal">Quanto mais tempo com o Clubbix, maior o potencial de aproveitar sua rede de benefícios.</p>
 
     <div class="plans-grid">
-      <div class="plan-card">
+      <div class="plan-card reveal">
         <div class="plan-eyebrow">Básico (Dois Semestres Letivos)</div>
         <div class="plan-name">Básico</div>
         <div class="plan-price"><span class="currency">R$</span><span class="amount">409,99</span></div>
@@ -1022,7 +1197,7 @@
         <a href="#" class="plan-cta">Assinar Básico</a>
       </div>
 
-      <div class="plan-card highlight">
+      <div class="plan-card highlight reveal">
         <div class="plan-badge">★ Mais escolhido</div>
         <div class="plan-eyebrow">Max (Até o fim do curso)</div>
         <div class="plan-name">Max</div>
@@ -1034,7 +1209,7 @@
         <a href="#" class="plan-cta">Assinar Max</a>
       </div>
 
-      <div class="plan-card">
+      <div class="plan-card reveal">
         <div class="plan-eyebrow">Plus (Quatro Semestres Letivos)</div>
         <div class="plan-name">Plus</div>
         <div class="plan-price"><span class="currency">R$</span><span class="amount">699,99</span></div>
@@ -1050,12 +1225,12 @@
 
 <section class="qa">
   <div class="container">
-    <div class="qa-copy">
+    <div class="qa-copy reveal">
       <h2>Ficou com dúvida? <span class="gradient-text">A gente responde</span></h2>
       <p class="lead">A forma mais rápida é com o Bixie, nosso assistente. Ele tira dúvidas na hora sobre planos, benefícios e mais.</p>
       <a href="#" class="btn btn-primary">Fale com o Bixie</a>
     </div>
-    <div class="chat-mock">
+    <div class="chat-mock reveal">
       <div class="chat-bubble">
         <div class="avatar"></div>
         <p>Oi! 👋 Eu sou o Bixie, assistente do Clubbix. Posso tirar suas dúvidas sobre planos, benefícios, indicações e mais.</p>
@@ -1071,7 +1246,7 @@
 
 <section class="cta-final">
   <div class="container">
-    <div class="cta-final-copy">
+    <div class="cta-final-copy reveal">
       <h2>Tem muita coisa <span class="gradient-text">esperando</span> por você.</h2>
       <a href="#planos" class="btn btn-primary">Fazer minha assinatura agora!</a>
     </div>
@@ -1080,7 +1255,7 @@
 
 <footer>
   <div class="container">
-    <div class="footer-top">
+    <div class="footer-top reveal">
       <div class="footer-brand">
         <div class="logo">
           <img src="assets/img/Logo Clubbix.png" alt="Clubbix">
@@ -1089,7 +1264,7 @@
         <p>Mais que vantagens, momentos. O clube exclusivo que conecta você às melhores experiências de Cuiabá.</p>
         <div class="social-row">
           <a href="#" aria-label="WhatsApp">
-            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M20.52 3.48A11.86 11.86 0 0 0 3.65 18.35L2.5 21.5l3.2-1.13a11.87 11.87 0 0 0 14.82-17.89ZM12 19.2a9.53 9.53 0 0 1-4.86-1.34l-.35-.2-1.9.67  .66-1.85-.23-.38A9.53 9.53 0 1 1 12 19.2Zm5.25-7.1c-.29-.15-1.7-.84-1.96-.94-.26-.1-.45-.15-.64.15-.2.29-.76.94-.94 1.13-.17.19-.35.22-.64.07-.29-.15-1.22-.45-2.32-1.43-.86-.77-1.44-1.72-1.6-2.01-.17-.29-.02-.45.13-.59.13-.13.29-.35.43-.52.15-.17.2-.29.3-.48.1-.19.05-.36-.03-.52-.08-.15-.64-1.55-.88-2.12-.23-.55-.47-.48-.64-.49l-.55-.01a1.04 1.04 0 0 0-.75.35c-.26.29-1 1-1 2.43s1.03 2.81 1.17 3c.14.19 2.03 3.1 4.92 4.35.69.3 1.23.48 1.65.61.69.22 1.32.19 1.82.12.56-.08 1.7-.69 1.94-1.35.24-.66.24-1.23.17-1.35-.07-.13-.26-.2-.55-.35Z"/></svg>
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M12.04 2.16c-5.46 0-9.9 4.43-9.9 9.9 0 1.75.46 3.45 1.33 4.95L2 22l5.1-1.34a9.87 9.87 0 0 0 4.94 1.33h.01c5.46 0 9.9-4.43 9.9-9.9 0-2.64-1.03-5.13-2.9-6.99a9.82 9.82 0 0 0-6.99-2.9Zm0 18.1h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.03.8.81-2.95-.2-.3a8.22 8.22 0 0 1-1.26-4.42c0-4.55 3.7-8.25 8.25-8.25 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.42 5.83c0 4.55-3.71 8.25-8.32 8.25Zm4.52-6.18c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.24-.64.81-.78.97-.14.17-.29.19-.53.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.24-.02-.38.11-.5.11-.11.25-.29.37-.43a1.6 1.6 0 0 0 .25-.41.46.46 0 0 0-.02-.44c-.06-.12-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.66.31-.23.24-.87.85-.87 2.08s.89 2.41 1.01 2.58c.13.16 1.76 2.69 4.26 3.77.6.26 1.06.41 1.43.53.6.19 1.14.16 1.57.1.48-.08 1.47-.6 1.68-1.18.2-.58.2-1.08.14-1.18-.06-.11-.23-.17-.48-.29Z"/></svg>
           </a>
           <a href="#" aria-label="Instagram">
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.2A4.8 4.8 0 1 1 7.2 12 4.8 4.8 0 0 1 12 7.2Zm0 2A2.8 2.8 0 1 0 14.8 12 2.8 2.8 0 0 0 12 9.2Zm4.75-3.05a1.25 1.25 0 1 1-1.25 1.25 1.25 1.25 0 0 1 1.25-1.25Z"/></svg>
@@ -1131,6 +1306,40 @@
     </div>
   </div>
 </footer>
+
+<script>
+  (function(){
+    var header = document.querySelector('header');
+    var toggle = document.querySelector('.menu-toggle');
+    if(toggle && header){
+      toggle.addEventListener('click', function(){
+        var open = header.classList.toggle('nav-open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.querySelectorAll('nav.main-nav a, .header-actions a').forEach(function(a){
+        a.addEventListener('click', function(){
+          header.classList.remove('nav-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    var reveals = document.querySelectorAll('.reveal');
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, {threshold:0.15, rootMargin:'0px 0px -60px 0px'});
+      reveals.forEach(function(el){ io.observe(el); });
+    } else {
+      reveals.forEach(function(el){ el.classList.add('is-visible'); });
+    }
+  })();
+</script>
 
 </body>
 </html>
